@@ -1,1175 +1,1165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>DEW MD | Official Website</title>
-  <meta name="description" content="Welcome to DEW MD Official Website. Explore WhatsApp bot features, commands and updates.">
-  <meta name="theme-color" content="#07110d">
-
-  <style>
-    :root {
-      --bg: #050a09;
-      --panel: #0b1512;
-      --green: #39ff88;
-      --cyan: #00eaff;
-      --text: #f2fff8;
-      --muted: #9ab3a7;
-      --border: rgba(57, 255, 136, 0.23);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 85px;
-    }
-
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 15% 15%, rgba(57,255,136,.10), transparent 35%),
-        radial-gradient(circle at 85% 35%, rgba(0,234,255,.08), transparent 35%),
-        linear-gradient(rgba(57,255,136,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(57,255,136,.035) 1px, transparent 1px);
-      background-size: auto, auto, 35px 35px, 35px 35px;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .container {
-      width: min(1120px, 92%);
-      margin: auto;
-    }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(5,10,9,.91);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .brand {
-      font-size: 25px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: var(--green);
-      text-shadow: 0 0 15px rgba(57,255,136,.65);
-    }
-
-    .brand span {
-      color: var(--cyan);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 23px;
-    }
-
-    .nav-links a {
-      color: #d0e5da;
-      font-size: 14px;
-      transition: .25s;
-    }
-
-    .nav-links a:hover {
-      color: var(--green);
-    }
-
-    .menu-toggle {
-      display: none;
-      color: var(--green);
-      border: 1px solid var(--border);
-      background: var(--panel);
-      border-radius: 9px;
-      padding: 7px 12px;
-      font-size: 22px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 45px;
-      padding: 11px 20px;
-      border-radius: 10px;
-      font-weight: 800;
-      border: 1px solid var(--green);
-      transition: transform .25s, box-shadow .25s;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 22px rgba(57,255,136,.23);
-    }
-
-    .btn-primary {
-      color: #041009;
-      background: var(--green);
-    }
-
-    .btn-outline {
-      color: var(--green);
-      background: transparent;
-    }
-
-    .hero {
-      min-height: 620px;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      padding: 85px 0;
-    }
-
-    .hero-content {
-      width: 100%;
-      animation: fadeUp .9s ease both;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 7px 14px;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      color: var(--green);
-      background: rgba(57,255,136,.055);
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin-bottom: 22px;
-    }
-
-    .hero h1 {
-      font-size: clamp(48px, 10vw, 95px);
-      font-weight: 1000;
-      line-height: 1.12;
-      letter-spacing: 3px;
-      margin-bottom: 18px;
-      color: var(--green);
-      text-shadow:
-        0 0 12px rgba(57,255,136,.65),
-        0 0 38px rgba(57,255,136,.18);
-      animation: glow 3s ease-in-out infinite alternate;
-    }
-
-    .hero h1 span {
-      color: var(--cyan);
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 0 auto 28px;
-      color: var(--muted);
-      font-size: 17px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 13px;
-    }
-
-    .section {
-      padding: 75px 0;
-    }
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .section-heading h2 {
-      color: var(--green);
-      font-size: clamp(28px, 5vw, 42px);
-      margin-bottom: 8px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: linear-gradient(145deg, rgba(14,29,23,.94), rgba(7,15,12,.96));
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      padding: 24px;
-      transition: transform .25s, border-color .25s, box-shadow .25s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: var(--green);
-      box-shadow: 0 8px 28px rgba(0,0,0,.25);
-    }
-
-    .card-icon {
-      font-size: 30px;
-      margin-bottom: 12px;
-    }
-
-    .card h3 {
-      color: var(--cyan);
-      margin-bottom: 9px;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .commands-box {
-      background: rgba(8,17,13,.93);
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      padding: 23px;
-    }
-
-    .search {
-      width: 100%;
-      min-height: 48px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      outline: none;
-      background: #07100c;
-      color: white;
-      padding: 12px 15px;
-      margin-bottom: 20px;
-    }
-
-    .search:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 14px rgba(57,255,136,.12);
-    }
-
-    .command-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 11px;
-    }
-
-    .command {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      background: #0b1912;
-      border: 1px solid rgba(57,255,136,.12);
-      border-radius: 9px;
-    }
-
-    .command code {
-      color: var(--green);
-      overflow-wrap: anywhere;
-    }
-
-    .command small {
-      color: var(--muted);
-      display: block;
-      font-size: 12px;
-      margin-top: 3px;
-    }
-
-    .copy-btn {
-      flex-shrink: 0;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 6px 9px;
-      color: var(--cyan);
-      background: transparent;
-      font-size: 12px;
-    }
-
-    .copy-btn:hover {
-      background: rgba(0,234,255,.08);
-    }
-
-    .voice-card,
-    .pair-card {
-      max-width: 760px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .voice-card p,
-    .pair-card p {
-      color: var(--muted);
-      margin: 12px 0 20px;
-    }
-
-    .voice-tags {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 20px 0;
-    }
-
-    .tag {
-      color: var(--green);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 7px 13px;
-      font-size: 13px;
-    }
-
-    .pair-input {
-      width: 100%;
-      max-width: 420px;
-      padding: 13px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      color: white;
-      background: #07100c;
-      outline: none;
-      margin: 8px 0 14px;
-    }
-
-    .notice {
-      margin-top: 14px;
-      font-size: 13px;
-      color: #ffda80;
-    }
-
-    .owner-card {
-      max-width: 420px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .owner-avatar {
-      width: 105px;
-      height: 105px;
-      margin: 0 auto 18px;
-      border: 2px solid var(--green);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 35px;
-      font-weight: 900;
-      color: var(--green);
-      background: radial-gradient(circle, #153524, #06100b);
-      box-shadow: 0 0 25px rgba(57,255,136,.22);
-    }
-
-    .owner-card h3 {
-      font-size: 25px;
-    }
-
-    .owner-card p {
-      color: var(--muted);
-      margin: 8px 0 20px;
-    }
-
-    footer {
-      padding: 27px 0;
-      border-top: 1px solid var(--border);
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    footer strong {
-      color: var(--green);
-    }
-
-    /* Subscribe popup */
-
-    .subscribe-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      background: rgba(0,0,0,.78);
-      backdrop-filter: blur(8px);
-      animation: fadeIn .35s ease;
-    }
-
-    .subscribe-overlay.hidden {
-      display: none;
-    }
-
-    .subscribe-modal {
-      position: relative;
-      width: min(430px, 100%);
-      padding: 30px 24px 23px;
-      text-align: center;
-      background: linear-gradient(145deg, #102219, #07100c 70%);
-      border: 1px solid var(--green);
-      border-radius: 20px;
-      box-shadow:
-        0 0 35px rgba(57,255,136,.16),
-        inset 0 0 20px rgba(57,255,136,.025);
-      animation: popupIn .45s ease;
-    }
-
-    .subscribe-logo {
-      width: 82px;
-      height: 82px;
-      margin: 0 auto 18px;
-      border-radius: 22px;
-      display: grid;
-      place-items: center;
-      background: #07120c;
-      border: 1px solid var(--green);
-      color: var(--green);
-      font-size: 25px;
-      font-weight: 1000;
-      letter-spacing: 1px;
-      box-shadow: 0 0 22px rgba(57,255,136,.17);
-    }
-
-    .subscribe-modal h2 {
-      color: var(--green);
-      font-size: 25px;
-      line-height: 1.3;
-      margin-bottom: 10px;
-    }
-
-    .subscribe-modal p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 22px;
-    }
-
-    .subscribe-youtube {
-      width: 100%;
-      min-height: 49px;
-      border: 0;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      color: white;
-      background: #e62117;
-      font-weight: 800;
-      transition: .2s;
-    }
-
-    .subscribe-youtube:hover {
-      background: #c91b13;
-      transform: translateY(-2px);
-    }
-
-    .maybe-later {
-      display: inline-block;
-      margin-top: 17px;
-      padding: 6px 15px;
-      border: none;
-      background: transparent;
-      color: #a8b6ae;
-      font-size: 13px;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-
-    .maybe-later:hover {
-      color: white;
-    }
-
-    .popup-footnote {
-      display: block;
-      margin-top: 17px;
-      color: #71887b;
-      font-size: 11px;
-    }
-
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px rgba(57,255,136,.4);
-      }
-      to {
-        text-shadow:
-          0 0 18px rgba(57,255,136,.7),
-          0 0 40px rgba(0,234,255,.17);
-      }
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(22px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes popupIn {
-      from {
-        opacity: 0;
-        transform: translateY(18px) scale(.96);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @media (max-width: 760px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        right: 0;
-        padding: 20px 5%;
-        background: #07100c;
-        border-bottom: 1px solid var(--border);
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links a {
-        padding: 5px 0;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .command-list {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: 540px;
-        padding: 65px 0;
-      }
-
-      .hero p {
-        font-size: 15px;
-      }
-
-      .section {
-        padding: 55px 0;
-      }
-
-      .card {
-        padding: 21px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b08">
+<meta name="description" content="DEW MD Official WhatsApp Bot Website. Explore bot features, commands, auto voice and official links.">
+<title>DEW MD | Official Website</title>
+
+<style>
+:root {
+  --green: #39ff88;
+  --cyan: #00f7ff;
+  --bg: #050b08;
+  --panel: rgba(9, 25, 17, .88);
+  --text: #eafff1;
+  --muted: #9bb8a5;
+  --border: rgba(57,255,136,.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 15% 5%, rgba(0,255,130,.12), transparent 38%),
+    radial-gradient(ellipse at 85% 30%, rgba(0,247,255,.08), transparent 35%),
+    var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .13;
+  background-image:
+    linear-gradient(rgba(57,255,136,.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,136,.13) 1px, transparent 1px);
+  background-size: 35px 35px;
+}
+
+a {
+  color: inherit;
+}
+
+button, input {
+  font: inherit;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+  width: min(1120px, 92%);
+  margin: auto;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(3,10,6,.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(15px);
+}
+
+.navbar {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand {
+  text-decoration: none;
+  color: var(--green);
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(57,255,136,.6);
+}
+
+.brand span {
+  color: var(--cyan);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  transition: .2s;
+}
+
+.nav-links a:hover {
+  color: var(--green);
+}
+
+.menu-toggle {
+  display: none;
+  color: var(--green);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  padding: 90px 0 75px;
+  text-align: center;
+}
+
+.hero-content {
+  width: 100%;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--green);
+  border: 1px solid var(--border);
+  background: rgba(57,255,136,.06);
+  border-radius: 30px;
+  padding: 7px 15px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  margin-bottom: 22px;
+}
+
+.status-dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px var(--green);
+  animation: blink 1.5s infinite;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 10vw, 100px);
+  line-height: 1.1;
+  letter-spacing: 4px;
+  color: var(--green);
+  text-shadow: 0 0 15px rgba(57,255,136,.6),
+               0 0 40px rgba(57,255,136,.2);
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+.hero h1 span {
+  color: var(--cyan);
+}
+
+.hero h2 {
+  margin-top: 18px;
+  font-size: clamp(18px, 3vw, 28px);
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 650px;
+  margin: 15px auto 28px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 19px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1px solid var(--green);
+  transition: .25s;
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #031108;
+  background: var(--green);
+  box-shadow: 0 0 18px rgba(57,255,136,.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 28px rgba(57,255,136,.5);
+}
+
+.btn-outline {
+  color: var(--green);
+  background: rgba(57,255,136,.04);
+}
+
+.btn-outline:hover {
+  color: #031108;
+  background: var(--green);
+  transform: translateY(-3px);
+}
+
+/* Neon WhatsApp Channel Button */
+.whatsapp-cyber-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  color: var(--green);
+  background: linear-gradient(135deg, #07140c, #10291a);
+  border: 1.5px solid var(--green);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all .3s ease;
+  animation: waNeonPulse 2.5s infinite;
+}
+
+.whatsapp-cyber-btn:hover {
+  color: #041009;
+  background: var(--green);
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px var(--green), 0 0 30px rgba(57,255,136,.4);
+}
+
+.wa-icon {
+  width: 23px;
+  height: 23px;
+  flex-shrink: 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 55px;
+}
+
+.stat {
+  padding: 20px 10px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.stat strong {
+  display: block;
+  color: var(--green);
+  font-size: 25px;
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+section {
+  padding: 75px 0;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-heading h2 {
+  font-size: clamp(27px, 5vw, 40px);
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.card {
+  padding: 24px;
+  border-radius: 15px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  transition: .25s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--green);
+  box-shadow: 0 0 22px rgba(57,255,136,.09);
+}
+
+.card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.command-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+#commandSearch {
+  flex: 1;
+  min-width: 200px;
+  padding: 13px 15px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #08130c;
+  color: var(--text);
+  outline: none;
+}
+
+#commandSearch:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(57,255,136,.12);
+}
+
+.command-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.command {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 15px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.command code {
+  color: var(--green);
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.command span {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+.copy-btn {
+  background: transparent;
+  color: var(--cyan);
+  border: 1px solid rgba(0,247,255,.35);
+  padding: 5px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.copy-btn:hover {
+  background: var(--cyan);
+  color: #001012;
+}
+
+.voice-box, .pair-box, .owner-box {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  text-align: center;
+}
+
+.voice-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.voice-table th, .voice-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.voice-table th {
+  color: var(--green);
+}
+
+.voice-table td {
+  color: var(--muted);
+}
+
+.note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 18px;
+}
+
+.pair-box p, .owner-box p {
+  color: var(--muted);
+  margin: 12px 0 20px;
+}
+
+.pair-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pair-form input {
+  flex: 1;
+  min-width: 210px;
+  padding: 13px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: #07110b;
+  outline: none;
+}
+
+.pair-form input:focus {
+  border-color: var(--green);
+}
+
+#pairMessage {
+  margin-top: 16px;
+  color: var(--cyan);
+  font-size: 13px;
+}
+
+.owner-avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 17px;
+  border: 2px solid var(--green);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--green);
+  font-size: 33px;
+  font-weight: 900;
+  box-shadow: 0 0 25px rgba(57,255,136,.2);
+}
+
+.owner-box h3 {
+  color: var(--green);
+  font-size: 25px;
+}
+
+footer {
+  padding: 25px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer span {
+  color: var(--green);
+}
+
+/* Subscribe Popup */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  background: rgba(0,0,0,.78);
+  backdrop-filter: blur(7px);
+}
+
+.popup-overlay.show {
+  display: flex;
+  animation: fadeIn .3s ease;
+}
+
+.popup {
+  width: min(420px, 100%);
+  padding: 30px 24px;
+  text-align: center;
+  background: linear-gradient(145deg, #0b1b11, #050b08);
+  border: 1px solid var(--green);
+  border-radius: 18px;
+  box-shadow: 0 0 35px rgba(57,255,136,.22);
+  position: relative;
+  animation: popupIn .35s ease;
+}
+
+.popup-logo {
+  width: 68px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 17px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  color: var(--green);
+  font-size: 21px;
+  font-weight: 900;
+  box-shadow: 0 0 22px rgba(57,255,136,.3);
+}
+
+.popup h2 {
+  color: var(--green);
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.popup p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.subscribe-btn {
+  width: 100%;
+  display: block;
+  padding: 13px;
+  border-radius: 9px;
+  background: var(--green);
+  color: #031108;
+  font-weight: 900;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.subscribe-btn:hover {
+  box-shadow: 0 0 25px rgba(57,255,136,.45);
+  transform: translateY(-2px);
+}
+
+.maybe-later {
+  margin-top: 15px;
+  border: none;
+  background: transparent;
+  color: #9bb8a5;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.maybe-later:hover {
+  color: white;
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 13px;
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+@keyframes blink {
+  50% { opacity: .35; }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 12px rgba(57,255,136,.35); }
+  to { text-shadow: 0 0 25px rgba(57,255,136,.8), 0 0 45px rgba(0,247,255,.15); }
+}
+
+@keyframes waNeonPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(57,255,136,.15); }
+  50% { box-shadow: 0 0 17px rgba(57,255,136,.32); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popupIn {
+  from { opacity: 0; transform: translateY(15px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 800px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    padding: 18px 5%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    background: #061009;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 5px 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 75px 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid, .command-list {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    gap: 8px;
+  }
+
+  .stat {
+    padding: 15px 6px;
+  }
+
+  .stat strong {
+    font-size: 21px;
+  }
+
+  .stat span {
+    font-size: 10px;
+  }
+
+  section {
+    padding: 55px 0;
+  }
+
+  .voice-box, .pair-box, .owner-box {
+    padding: 22px 15px;
+  }
+
+  .voice-table th, .voice-table td {
+    padding: 9px 5px;
+    font-size: 12px;
+  }
+
+  .command {
+    gap: 7px;
+    padding: 12px 10px;
+  }
+
+  .command span {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- Subscribe popup -->
-  <div
-    class="subscribe-overlay"
-    id="subscribeOverlay"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="subscribeTitle"
-  >
-    <div class="subscribe-modal">
+<header>
+  <div class="container navbar">
+    <a class="brand" href="#home">DEW <span>MD</span></a>
 
-      <div class="subscribe-logo">DEW<br>MD</div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
+      ☰ MENU
+    </button>
 
-      <h2 id="subscribeTitle">Join the DEW MD Family!</h2>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">HOME</a>
+      <a href="#features">FEATURES</a>
+      <a href="#commands">COMMANDS</a>
+      <a href="#voice">AUTO VOICE</a>
+      <a href="#pairing">PAIRING</a>
+      <a href="#owner">OWNER</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div class="status">
+        <span class="status-dot"></span>
+        OFFICIAL DEW MD WEBSITE
+      </div>
+
+      <h1>DEW <span>MD</span></h1>
+      <h2>Next Generation WhatsApp Bot</h2>
 
       <p>
-        Enjoy our latest bot updates, features and tutorials.
-        Visit our official YouTube channel!
+        Welcome to the official DEW MD website. Explore bot features,
+        commands, auto voice details and official community links.
       </p>
 
-      <a
-        class="subscribe-youtube"
-        href="https://www.youtube.com/@dew_md_wabot12"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span aria-hidden="true">▶</span>
-        Subscribe to DEW MD
-      </a>
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="#features">Explore Features ↘</a>
 
-      <button
-        class="maybe-later"
-        id="maybeLater"
-        type="button"
-      >
-        Maybe Later
-      </button>
+        <a class="btn btn-outline"
+           href="https://github.com/mddew268-lang/Dew-md"
+           target="_blank" rel="noopener noreferrer">
+          GitHub ↗
+        </a>
 
-      <small class="popup-footnote">
-        DEW MD • Official Community
-      </small>
+        <a class="whatsapp-cyber-btn"
+           href="https://whatsapp.com/channel/0029Vb4hYYs77qVTnYMiAI11"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Join DEW MD WhatsApp Channel">
+          <svg class="wa-icon" viewBox="0 0 24 24"
+               fill="currentColor" aria-hidden="true">
+            <path d="M20.52 3.48A11.82 11.82 0 0 0 12.08 0C5.48 0 .11 5.36.1 11.96c0 2.1.55 4.15 1.6 5.96L0 24l6.24-1.64a11.95 11.95 0 0 0 5.83 1.49h.01c6.6 0 11.97-5.37 11.97-11.97 0-3.2-1.25-6.2-3.53-8.4ZM12.08 21.8a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.7.97.99-3.6-.23-.37a9.83 9.83 0 0 1-1.5-5.25c0-5.44 4.43-9.87 9.86-9.87 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.98c0 5.44-4.43 9.87-9.9 9.87Zm5.42-7.39c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.68-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.28.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/>
+          </svg>
+          <span>WhatsApp Channel</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
 
+      <div class="stats">
+        <div class="stat">
+          <strong>24/7</strong>
+          <span>BOT FEATURES</span>
+        </div>
+        <div class="stat">
+          <strong>SMART</strong>
+          <span>AUTOMATION</span>
+        </div>
+        <div class="stat">
+          <strong>DEW MD</strong>
+          <span>CYBER EXPERIENCE</span>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Navigation -->
-  <header class="navbar">
-    <div class="container nav-inner">
+  <section id="features">
+    <div class="container">
+      <div class="section-heading">
+        <h2>BOT FEATURES</h2>
+        <p>Powerful tools in one WhatsApp bot.</p>
+      </div>
 
-      <a href="#home" class="brand">
-        DEW <span>MD</span>
-      </a>
+      <div class="grid">
+        <article class="card">
+          <div class="card-icon">🎙️</div>
+          <h3>Auto Voice</h3>
+          <p>Automatic voice replies for configured greetings and messages.</p>
+        </article>
 
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
+        <article class="card">
+          <div class="card-icon">🧠</div>
+          <h3>AI Assistant</h3>
+          <p>AI question-answering features when the required API is configured.</p>
+        </article>
 
-      <nav class="nav-links" id="navLinks">
-        <a href="#home">Home</a>
-        <a href="#features">Features</a>
-        <a href="#commands">Commands</a>
-        <a href="#voice">Auto Voice</a>
-        <a href="#pairing">Pairing</a>
-        <a href="#owner">Owner</a>
-        <a
-          href="https://www.youtube.com/@dew_md_wabot12"
-          target="_blank"
-          rel="noopener noreferrer"
-        >YouTube ↗</a>
-      </nav>
+        <article class="card">
+          <div class="card-icon">🎵</div>
+          <h3>Music Tools</h3>
+          <p>Music search commands and media features, depending on bot setup.</p>
+        </article>
 
+        <article class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Group Tools</h3>
+          <p>Group management commands for permitted administrators.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">⚙️</div>
+          <h3>Settings</h3>
+          <p>Control supported automation features with the bot settings menu.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">✨</div>
+          <h3>Fun & Utility</h3>
+          <p>Useful commands for everyday chats and entertainment.</p>
+        </article>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main>
+  <section id="commands">
+    <div class="container">
+      <div class="section-heading">
+        <h2>COMMAND CENTER</h2>
+        <p>Search a command and copy it easily.</p>
+      </div>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-      <div class="container hero-content">
+      <div class="command-tools">
+        <input id="commandSearch" type="search"
+               placeholder="Search commands... e.g. .menu"
+               aria-label="Search commands">
+      </div>
 
-        <span class="badge">⚡ OFFICIAL WHATSAPP BOT PROJECT</span>
+      <div class="command-list" id="commandList">
+        <div class="command"><code>.menu</code><span>Show menu</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.help</code><span>Help information</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.ping</code><span>Check response</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.alive</code><span>Bot status</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.uptime</code><span>Runtime information</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.owner</code><span>Owner information</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.repo</code><span>GitHub repository</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.sticker</code><span>Create a sticker</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.toimg</code><span>Convert supported sticker</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.take</code><span>Sticker metadata</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.ai</code><span>AI assistant</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.ask</code><span>Ask a question</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.yt</code><span>YouTube search</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.song</code><span>Music search</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.play</code><span>Play music</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.video</code><span>Video search</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.lyrics</code><span>Lyrics lookup</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.translate</code><span>Translate text</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.groupinfo</code><span>Group information</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.admins</code><span>List group admins</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.tagall</code><span>Tag group members</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.hidetag</code><span>Hidden group mention</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.kick</code><span>Remove a member</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.add</code><span>Add a member</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.promote</code><span>Promote a member</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.demote</code><span>Demote a member</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.mute</code><span>Close group messages</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.unmute</code><span>Open group messages</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.open</code><span>Open group</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.close</code><span>Close group</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.poll</code><span>Create a poll</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.setting</code><span>Automation settings</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.delete</code><span>Delete a supported message</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.getpp</code><span>Get profile picture</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.calc</code><span>Calculator</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.grouplink</code><span>Group invitation link</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.groupdesc</code><span>Show group description</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.setgroupname</code><span>Change group name</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.setdesc</code><span>Change group description</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.afk</code><span>Set AFK status</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.back</code><span>Return from AFK</span><button class="copy-btn">COPY</button></div>
+        <div class="command"><code>.remind</code><span>Reminder command</span><button class="copy-btn">COPY</button></div>
+      </div>
 
-        <h1>DEW <span>MD</span></h1>
+      <p class="note">
+        Note: The website lists intended commands. A command works only if it is implemented
+        in the currently deployed bot version.
+      </p>
+    </div>
+  </section>
 
+  <section id="voice">
+    <div class="container">
+      <div class="section-heading">
+        <h2>AUTO VOICE SYSTEM</h2>
+        <p>Configured greeting audio shortcuts.</p>
+      </div>
+
+      <div class="voice-box">
+        <h3 style="color:var(--green)">DEW MD Voice Replies 🎧</h3>
+        <table class="voice-table">
+          <thead>
+            <tr><th>Shortcut</th><th>Reply</th><th>Audio</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>mk / Mk</td><td>Mokuth na ithin</td><td>Voice note</td></tr>
+            <tr><td>gm / Gm</td><td>Good morning 💞</td><td>Voice note</td></tr>
+            <tr><td>gn / Gn</td><td>Good night 💞</td><td>Voice note</td></tr>
+          </tbody>
+        </table>
+        <p class="note">
+          Auto Voice works only when the bot is online and the feature and audio files
+          are correctly configured.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pairing">
+    <div class="container">
+      <div class="section-heading">
+        <h2>WHATSAPP PAIRING</h2>
+        <p>Pairing interface preview.</p>
+      </div>
+
+      <div class="pair-box">
+        <div style="font-size:42px">🔗</div>
+        <h3 style="color:var(--green);margin-top:8px">Connect Your WhatsApp</h3>
         <p>
-          Welcome to the official DEW MD website.
-          Explore WhatsApp bot features, useful commands,
-          auto voice functions and project updates.
+          The pairing backend has not been connected yet. This static website
+          cannot generate a real WhatsApp pairing code on its own.
         </p>
 
-        <div class="hero-buttons">
-          <a class="btn btn-primary" href="#features">
-            Explore Features
-          </a>
+        <form class="pair-form" id="pairForm">
+          <input id="phoneNumber" type="tel"
+                 inputmode="numeric"
+                 autocomplete="tel"
+                 placeholder="Country code + phone number"
+                 aria-label="Phone number"
+                 maxlength="20">
+          <button class="btn btn-primary" type="submit">Request Pairing</button>
+        </form>
 
-          <a
-            class="btn btn-outline"
-            href="https://github.com/mddew268-lang/Dew-md"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View GitHub
-          </a>
-        </div>
-
+        <div id="pairMessage" role="status" aria-live="polite"></div>
+        <p class="note">
+          Never share your WhatsApp verification code or pairing code with anyone.
+        </p>
       </div>
-    </section>
-
-    <!-- Features -->
-    <section class="section" id="features">
-      <div class="container">
-
-        <div class="section-heading">
-          <h2>Bot Features</h2>
-          <p>Explore the DEW MD feature categories.</p>
-        </div>
-
-        <div class="grid">
-
-          <article class="card">
-            <div class="card-icon">🤖</div>
-            <h3>Smart Commands</h3>
-            <p>
-              Helpful bot commands for everyday WhatsApp
-              conversations and supported tasks.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">🎙️</div>
-            <h3>Auto Voice</h3>
-            <p>
-              Configure supported greeting messages and
-              voice-note features in your bot.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">👥</div>
-            <h3>Group Tools</h3>
-            <p>
-              Discover group-management commands and
-              supported group utilities.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">🧠</div>
-            <h3>AI Assistant</h3>
-            <p>
-              Explore AI-related commands when the required
-              services and API keys are configured.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">⚙️</div>
-            <h3>Bot Settings</h3>
-            <p>
-              Customize supported automatic features
-              using the bot's settings commands.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="card-icon">🔄</div>
-            <h3>Regular Updates</h3>
-            <p>
-              Visit the project repository for source-code
-              changes and new feature information.
-            </p>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Commands -->
-    <section class="section" id="commands">
-      <div class="container">
-
-        <div class="section-heading">
-          <h2>Bot Commands</h2>
-          <p>Search a command and copy it with one tap.</p>
-        </div>
-
-        <div class="commands-box">
-
-          <input
-            class="search"
-            id="commandSearch"
-            type="search"
-            placeholder="🔍 Search commands..."
-            aria-label="Search bot commands"
-          >
-
-          <div class="command-list" id="commandList">
-
-            <div class="command" data-search=".menu main menu">
-              <div>
-                <code>.menu</code>
-                <small>Display the main menu</small>
-              </div>
-              <button class="copy-btn" data-copy=".menu">Copy</button>
-            </div>
-
-            <div class="command" data-search=".help help">
-              <div>
-                <code>.help</code>
-                <small>Show help information</small>
-              </div>
-              <button class="copy-btn" data-copy=".help">Copy</button>
-            </div>
-
-            <div class="command" data-search=".ping connection">
-              <div>
-                <code>.ping</code>
-                <small>Check bot response</small>
-              </div>
-              <button class="copy-btn" data-copy=".ping">Copy</button>
-            </div>
-
-            <div class="command" data-search=".alive status">
-              <div>
-                <code>.alive</code>
-                <small>Check bot status</small>
-              </div>
-              <button class="copy-btn" data-copy=".alive">Copy</button>
-            </div>
-
-            <div class="command" data-search=".owner developer">
-              <div>
-                <code>.owner</code>
-                <small>Owner information</small>
-              </div>
-              <button class="copy-btn" data-copy=".owner">Copy</button>
-            </div>
-
-            <div class="command" data-search=".setting settings">
-              <div>
-                <code>.setting</code>
-                <small>Bot settings menu</small>
-              </div>
-              <button class="copy-btn" data-copy=".setting">Copy</button>
-            </div>
-
-            <div class="command" data-search=".sticker image">
-              <div>
-                <code>.sticker</code>
-                <small>Create a sticker where supported</small>
-              </div>
-              <button class="copy-btn" data-copy=".sticker">Copy</button>
-            </div>
-
-            <div class="command" data-search=".yt youtube search">
-              <div>
-                <code>.yt</code>
-                <small>YouTube search command</small>
-              </div>
-              <button class="copy-btn" data-copy=".yt ">Copy</button>
-            </div>
-
-            <div class="command" data-search=".song music">
-              <div>
-                <code>.song</code>
-                <small>Music command, if configured</small>
-              </div>
-              <button class="copy-btn" data-copy=".song ">Copy</button>
-            </div>
-
-            <div class="command" data-search=".groupinfo group information">
-              <div>
-                <code>.groupinfo</code>
-                <small>Group information</small>
-              </div>
-              <button class="copy-btn" data-copy=".groupinfo">Copy</button>
-            </div>
-
-            <div class="command" data-search=".admins admin list">
-              <div>
-                <code>.admins</code>
-                <small>Show group admins</small>
-              </div>
-              <button class="copy-btn" data-copy=".admins">Copy</button>
-            </div>
-
-            <div class="command" data-search=".tagall mention group">
-              <div>
-                <code>.tagall</code>
-                <small>Group mention command</small>
-              </div>
-              <button class="copy-btn" data-copy=".tagall">Copy</button>
-            </div>
-
-          </div>
-
-          <p class="notice">
-            Note: Commands work only if they are implemented
-            and enabled in your running bot.
-          </p>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Auto Voice -->
-    <section class="section" id="voice">
-      <div class="container">
-
-        <div class="section-heading">
-          <h2>Auto Voice System</h2>
-          <p>Greeting voice-note features for DEW MD.</p>
-        </div>
-
-        <div class="card voice-card">
-          <div class="card-icon">🎧</div>
-
-          <h3>Voice Greeting Collection</h3>
-
-          <p>
-            DEW MD can be configured to respond to supported
-            greeting messages with voice notes.
-          </p>
-
-          <div class="voice-tags">
-            <span class="tag">MK — Greeting</span>
-            <span class="tag">GM — Good Morning</span>
-            <span class="tag">GN — Good Night</span>
-          </div>
-
-          <p>
-            Availability depends on the bot's code and
-            configured audio files.
-          </p>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Pairing -->
-    <section class="section" id="pairing">
-      <div class="container">
-
-        <div class="section-heading">
-          <h2>WhatsApp Pairing</h2>
-          <p>Connect your WhatsApp using a supported bot backend.</p>
-        </div>
-
-        <div class="card pair-card">
-          <div class="card-icon">🔗</div>
-
-          <h3>Pair Your WhatsApp</h3>
-
-          <p>
-            A secure backend is required to generate and
-            manage real WhatsApp pairing codes.
-          </p>
-
-          <input
-            class="pair-input"
-            id="phoneNumber"
-            type="tel"
-            inputmode="numeric"
-            autocomplete="tel"
-            placeholder="Enter number with country code"
-            aria-label="Phone number"
-          >
-
-          <br>
-
-          <button class="btn btn-primary" id="pairButton">
-            Get Pairing Code
-          </button>
-
-          <p class="notice" id="pairMessage" aria-live="polite">
-            Pairing backend is not connected yet.
-          </p>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Owner -->
-    <section class="section" id="owner">
-      <div class="container">
-
-        <div class="section-heading">
-          <h2>Project Owner</h2>
-          <p>Meet the person behind DEW MD.</p>
-        </div>
-
-        <div class="card owner-card">
-
-          <div class="owner-avatar">A</div>
-
-          <h3>ARUSHA</h3>
-
-          <p>DEW MD Project Owner</p>
-
-          <div class="hero-buttons">
-            <a
-              class="btn btn-primary"
-              href="https://github.com/mddew268-lang"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub Profile
-            </a>
-
-            <a
-              class="btn btn-outline"
-              href="https://www.youtube.com/@dew_md_wabot12"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              YouTube Channel
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>
-        © <span id="year"></span>
-        <strong>DEW MD</strong> • Official Website
-      </p>
-      <p>Built with 💚 for the DEW MD community.</p>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    // Subscribe popup
-    const subscribeOverlay =
-      document.getElementById("subscribeOverlay");
+  <section id="owner">
+    <div class="container">
+      <div class="section-heading">
+        <h2>ABOUT THE OWNER</h2>
+        <p>Behind the DEW MD project.</p>
+      </div>
 
-    const maybeLaterButton =
-      document.getElementById("maybeLater");
+      <div class="owner-box">
+        <div class="owner-avatar">A</div>
+        <h3>ARUSHA</h3>
+        <p>Owner & Developer of DEW MD</p>
 
-    maybeLaterButton.addEventListener("click", function () {
-      subscribeOverlay.classList.add("hidden");
-    });
+        <div class="hero-buttons">
+          <a class="btn btn-primary"
+             href="https://github.com/mddew268-lang/Dew-md"
+             target="_blank" rel="noopener noreferrer">
+            GitHub Repository ↗
+          </a>
 
-    // Mobile navigation
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+          <a class="btn btn-outline"
+             href="https://www.youtube.com/@dew_md_wabot12"
+             target="_blank" rel="noopener noreferrer">
+            YouTube Channel ↗
+          </a>
 
-    menuToggle.addEventListener("click", function () {
-      const isOpen = navLinks.classList.toggle("open");
+          <a class="whatsapp-cyber-btn"
+             href="https://whatsapp.com/channel/0029Vb4hYYs77qVTnYMiAI11"
+             target="_blank" rel="noopener noreferrer">
+            <svg class="wa-icon" viewBox="0 0 24 24"
+                 fill="currentColor" aria-hidden="true">
+              <path d="M20.52 3.48A11.82 11.82 0 0 0 12.08 0C5.48 0 .11 5.36.1 11.96c0 2.1.55 4.15 1.6 5.96L0 24l6.24-1.64a11.95 11.95 0 0 0 5.83 1.49h.01c6.6 0 11.97-5.37 11.97-11.97 0-3.2-1.25-6.2-3.53-8.4ZM12.08 21.8a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.7.97.99-3.6-.23-.37a9.83 9.83 0 0 1-1.5-5.25c0-5.44 4.43-9.87 9.86-9.87 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.98c0 5.44-4.43 9.87-9.9 9.87Zm5.42-7.39c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.68-2.08-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.28.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.5 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/>
+            </svg>
+            WhatsApp Channel ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.textContent = isOpen ? "✕" : "☰";
-    });
+<footer>
+  <div class="container">
+    © <span id="year"></span> <span>DEW MD</span> · Official Website
+    <br>Designed with 💚 for the DEW MD community.
+  </div>
+</footer>
 
-    navLinks.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
-      });
-    });
+<!-- YouTube Subscribe Popup -->
+<div class="popup-overlay" id="subscribePopup"
+     role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+  <div class="popup">
+    <button class="popup-close" id="popupClose"
+            aria-label="Close popup">&times;</button>
 
-    // Command search
-    const commandSearch = document.getElementById("commandSearch");
-    const commands = document.querySelectorAll(".command");
+    <div class="popup-logo">DEW<br>MD</div>
 
-    commandSearch.addEventListener("input", function () {
-      const query = commandSearch.value.trim().toLowerCase();
+    <h2 id="popupTitle">Join the DEW MD Family!</h2>
+    <p>
+      Enjoy bot updates, new features and more.
+      Subscribe to the official DEW MD YouTube channel!
+    </p>
 
-      commands.forEach(function (command) {
-        const searchableText =
-          (command.dataset.search || command.textContent).toLowerCase();
+    <a class="subscribe-btn"
+       href="https://www.youtube.com/@dew_md_wabot12"
+       target="_blank" rel="noopener noreferrer"
+       id="subscribeLink">
+      ▶ SUBSCRIBE TO DEW MD
+    </a>
 
-        command.style.display =
-          searchableText.includes(query) ? "flex" : "none";
-      });
-    });
+    <button class="maybe-later" id="maybeLater">Maybe Later</button>
+  </div>
+</div>
 
-    // Copy commands
-    document.querySelectorAll("[data-copy]").forEach(function (button) {
-      button.addEventListener("click", async function () {
-        const text = button.dataset.copy;
-        const originalText = button.textContent;
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
 
-        try {
-          await navigator.clipboard.writeText(text);
-          button.textContent = "Copied!";
-        } catch (error) {
-          const temporaryInput = document.createElement("textarea");
-          temporaryInput.value = text;
-          temporaryInput.style.position = "fixed";
-          temporaryInput.style.opacity = "0";
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+});
 
-          document.body.appendChild(temporaryInput);
-          temporaryInput.select();
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  });
+});
 
-          const copied = document.execCommand("copy");
-          temporaryInput.remove();
+// Command search
+const commandSearch = document.getElementById("commandSearch");
+const commands = [...document.querySelectorAll(".command")];
 
-          button.textContent = copied ? "Copied!" : "Copy failed";
-        }
+commandSearch.addEventListener("input", () => {
+  const query = commandSearch.value.toLowerCase().trim();
 
-        setTimeout(function () {
-          button.textContent = originalText;
-        }, 1300);
-      });
-    });
+  commands.forEach(command => {
+    command.style.display =
+      command.textContent.toLowerCase().includes(query) ? "flex" : "none";
+  });
+});
 
-    // Pairing placeholder: no real pairing code is generated.
-    const pairButton = document.getElementById("pairButton");
-    const phoneNumber = document.getElementById("phoneNumber");
-    const pairMessage = document.getElementById("pairMessage");
+// Copy command buttons
+document.querySelectorAll(".copy-btn").forEach(button => {
+  button.addEventListener("click", async () => {
+    const command = button.parentElement.querySelector("code").textContent;
+    const originalText = button.textContent;
 
-    pairButton.addEventListener("click", function () {
-      const number = phoneNumber.value.replace(/\D/g, "");
+    try {
+      await navigator.clipboard.writeText(command);
+      button.textContent = "COPIED!";
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = command;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
 
-      if (number.length < 8 || number.length > 15) {
-        pairMessage.textContent =
-          "Please enter a valid phone number including country code.";
-        return;
+      try {
+        document.execCommand("copy");
+        button.textContent = "COPIED!";
+      } catch {
+        button.textContent = "COPY FAILED";
       }
 
-      pairMessage.textContent =
-        "The pairing backend is not connected yet. No pairing code was generated.";
-    });
+      textarea.remove();
+    }
 
-    // Current year
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+    setTimeout(() => {
+      button.textContent = originalText;
+    }, 1500);
+  });
+});
+
+// Pairing interface only — no real pairing backend connected
+document.getElementById("pairForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const phone = document.getElementById("phoneNumber").value.trim();
+  const message = document.getElementById("pairMessage");
+  const digits = phone.replace(/\D/g, "");
+
+  if (digits.length < 8 || digits.length > 15) {
+    message.textContent =
+      "Please enter a valid phone number including your country code.";
+    return;
+  }
+
+  message.textContent =
+    "Website design is ready, but the pairing backend is not connected yet. No code has been generated.";
+});
+
+// Subscribe popup
+const popup = document.getElementById("subscribePopup");
+const closePopup = () => {
+  popup.classList.remove("show");
+  sessionStorage.setItem("dewMdPopupDismissed", "yes");
+};
+
+document.getElementById("maybeLater").addEventListener("click", closePopup);
+document.getElementById("popupClose").addEventListener("click", closePopup);
+
+popup.addEventListener("click", event => {
+  if (event.target === popup) closePopup();
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && popup.classList.contains("show")) {
+    closePopup();
+  }
+});
+
+document.getElementById("subscribeLink").addEventListener("click", () => {
+  closePopup();
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+window.addEventListener("load", () => {
+  if (!sessionStorage.getItem("dewMdPopupDismissed")) {
+    setTimeout(() => popup.classList.add("show"), 700);
+  }
+});
+</script>
 
 </body>
   </html>
