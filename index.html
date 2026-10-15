@@ -3,411 +3,833 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050b12">
-
-<title>DEW MD | WhatsApp Bot</title>
+<meta name="theme-color" content="#050a08">
+<title>DEW MD | Official Website</title>
 
 <style>
 :root {
-  --green: #00ff99;
-  --cyan: #00e5ff;
-  --bg: #050b12;
-  --card: rgba(12, 25, 35, 0.88);
+  --green:#39ff14;
+  --cyan:#00f7ff;
+  --bg:#050a08;
+  --card:#0a1813;
+  --text:#f1fff7;
+  --muted:#a8c3b4;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
 }
 
 body {
-  background: var(--bg);
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
+  font-family:Arial,sans-serif;
   background:
-    radial-gradient(circle at 20% 20%, #003b2b 0, transparent 35%),
-    radial-gradient(circle at 80% 70%, #002b40 0, transparent 35%),
-    #050b12;
+    radial-gradient(circle at 15% 15%,#07351e,transparent 35%),
+    radial-gradient(circle at 85% 35%,#003237,transparent 30%),
+    var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-#particles {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
+a {
+  color:inherit;
+  text-decoration:none;
 }
+
+button,input {
+  font:inherit;
+}
+
+button {
+  cursor:pointer;
+}
+
+/* INTRO */
+
+#intro {
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#020503;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  animation:introExit 1s ease 2.5s forwards;
+}
+
+#intro img {
+  width:180px;
+  max-width:60vw;
+  border-radius:50%;
+  animation:introLogo 1.5s ease-in-out infinite alternate;
+}
+
+#intro h1 {
+  color:var(--green);
+  letter-spacing:5px;
+  text-shadow:0 0 15px var(--green);
+}
+
+.loader {
+  width:160px;
+  height:4px;
+  background:#173022;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.loader::after {
+  content:"";
+  display:block;
+  height:100%;
+  width:40%;
+  background:linear-gradient(90deg,var(--green),var(--cyan));
+  animation:loading 1.2s infinite;
+}
+
+@keyframes introExit {
+  to {
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+}
+
+@keyframes introLogo {
+  from {
+    transform:scale(.92) rotate(-4deg);
+    filter:drop-shadow(0 0 8px var(--green));
+  }
+  to {
+    transform:scale(1.05) rotate(4deg);
+    filter:drop-shadow(0 0 28px var(--cyan));
+  }
+}
+
+@keyframes loading {
+  from {transform:translateX(-120%);}
+  to {transform:translateX(350%);}
+}
+
+/* BACKGROUND */
+
+.background-glow {
+  position:fixed;
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  background:var(--green);
+  opacity:.07;
+  filter:blur(100px);
+  pointer-events:none;
+  z-index:-1;
+  animation:floatGlow 8s ease-in-out infinite alternate;
+}
+
+.glow-one {
+  top:20%;
+  left:-100px;
+}
+
+.glow-two {
+  right:-100px;
+  bottom:10%;
+  background:var(--cyan);
+}
+
+@keyframes floatGlow {
+  to {
+    transform:translate(80px,-50px) scale(1.3);
+  }
+}
+
+/* NAVIGATION */
 
 header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 17px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  background: rgba(3, 10, 16, 0.9);
-  border-bottom: 1px solid rgba(0,255,153,.3);
-  backdrop-filter: blur(15px);
-}
-
-.brand {
-  color: var(--green);
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-shadow: 0 0 15px var(--green);
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(3,10,6,.94);
+  border-bottom:1px solid rgba(57,255,20,.3);
+  backdrop-filter:blur(16px);
 }
 
 nav {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  max-width:1150px;
+  margin:auto;
+  padding:13px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 13px;
-  transition: .3s;
+.brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  font-size:21px;
+  letter-spacing:2px;
+  color:var(--green);
+  text-shadow:0 0 12px var(--green);
 }
 
-nav a:hover {
-  color: var(--green);
+.brand img {
+  width:43px;
+  height:43px;
+  object-fit:cover;
+  border-radius:50%;
+  border:1px solid var(--green);
+  animation:logoPulse 3s infinite;
 }
+
+@keyframes logoPulse {
+  50% {
+    box-shadow:0 0 8px var(--green),0 0 22px var(--cyan);
+  }
+}
+
+.nav-links {
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.nav-links a {
+  font-size:13px;
+  color:var(--muted);
+  transition:.25s;
+  white-space:nowrap;
+}
+
+.nav-links a:hover {
+  color:var(--green);
+  text-shadow:0 0 10px var(--green);
+}
+
+/* LIVE STATUS */
+
+.status-pill {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:9px 13px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:30px;
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+}
+
+.status-dot {
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#ffc107;
+  box-shadow:0 0 10px currentColor;
+  flex-shrink:0;
+}
+
+.status-checking {
+  color:#ffc107;
+}
+
+.status-online {
+  color:var(--green);
+  border-color:rgba(57,255,20,.5);
+  background:rgba(57,255,20,.07);
+}
+
+.status-online .status-dot {
+  background:var(--green);
+  animation:statusPulse 1.5s infinite;
+}
+
+.status-offline {
+  color:#ff5964;
+  border-color:rgba(255,89,100,.4);
+}
+
+.status-offline .status-dot {
+  background:#ff5964;
+}
+
+.status-error {
+  color:#ffc107;
+  border-color:rgba(255,193,7,.4);
+}
+
+@keyframes statusPulse {
+  50% {
+    opacity:.45;
+    box-shadow:0 0 3px var(--green);
+  }
+}
+
+.hero-status {
+  margin:0 auto 18px;
+  width:max-content;
+  max-width:100%;
+}
+
+/* COMMON */
+
+section {
+  padding:85px 20px;
+  scroll-margin-top:70px;
+}
+
+.container {
+  max-width:1100px;
+  margin:auto;
+}
+
+.section-title {
+  text-align:center;
+  font-size:clamp(27px,5vw,39px);
+  margin-bottom:14px;
+}
+
+.section-title span {
+  color:var(--green);
+  text-shadow:0 0 15px rgba(57,255,20,.4);
+}
+
+.section-description {
+  max-width:680px;
+  text-align:center;
+  margin:0 auto 35px;
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.buttons {
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+  justify-content:center;
+  margin-top:25px;
+}
+
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:13px 22px;
+  border-radius:9px;
+  font-weight:bold;
+  font-size:14px;
+  border:1px solid var(--green);
+  transition:.25s;
+}
+
+.btn-primary {
+  color:#041006;
+  background:var(--green);
+  box-shadow:0 0 15px rgba(57,255,20,.25);
+}
+
+.btn-secondary {
+  color:var(--cyan);
+  background:rgba(0,247,255,.04);
+  border-color:var(--cyan);
+}
+
+.btn:hover {
+  transform:translateY(-3px);
+  box-shadow:0 0 23px rgba(57,255,20,.45);
+}
+
+/* HOME */
 
 .hero {
-  min-height: 88vh;
-  padding: 60px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  min-height:620px;
+  display:flex;
+  align-items:center;
+  text-align:center;
+  padding-top:65px;
 }
 
-.logo-wrap {
-  width: 230px;
-  height: 230px;
-  perspective: 1000px;
-  margin-bottom: 35px;
+.hero-content {
+  width:100%;
+  animation:heroAppear 1s ease both;
 }
 
-.logo {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 50%;
-  animation: float 4s ease-in-out infinite,
-             glow 2s ease-in-out infinite alternate;
-  filter: drop-shadow(0 0 18px var(--green));
-  transform-style: preserve-3d;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotateY(-8deg) rotateX(5deg);
-  }
-  50% {
-    transform: translateY(-15px) rotateY(8deg) rotateX(-5deg);
-  }
-}
-
-@keyframes glow {
+@keyframes heroAppear {
   from {
-    filter: drop-shadow(0 0 10px var(--green));
+    opacity:0;
+    transform:translateY(35px);
   }
   to {
-    filter: drop-shadow(0 0 30px var(--cyan));
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.hero-logo {
+  width:240px;
+  max-width:65vw;
+  aspect-ratio:1/1;
+  object-fit:contain;
+  border-radius:50%;
+  margin:10px 0 20px;
+  transform-style:preserve-3d;
+  animation:dewLogo3D 5s ease-in-out infinite;
+  will-change:transform,filter;
+}
+
+@keyframes dewLogo3D {
+  0% {
+    transform:perspective(800px) rotateY(-12deg) rotateX(5deg) scale(.96);
+    filter:drop-shadow(0 0 8px var(--green));
+  }
+  25% {
+    transform:perspective(800px) rotateY(0) rotateX(-3deg) scale(1.02);
+    filter:drop-shadow(0 0 20px var(--cyan));
+  }
+  50% {
+    transform:perspective(800px) rotateY(12deg) rotateX(5deg) scale(1.05);
+    filter:drop-shadow(0 0 20px var(--green))
+           drop-shadow(0 0 30px var(--cyan));
+  }
+  75% {
+    transform:perspective(800px) rotateY(0) rotateX(-3deg) scale(1.02);
+    filter:drop-shadow(0 0 20px var(--cyan));
+  }
+  100% {
+    transform:perspective(800px) rotateY(-12deg) rotateX(5deg) scale(.96);
+    filter:drop-shadow(0 0 8px var(--green));
   }
 }
 
 .hero h1 {
-  font-size: clamp(38px, 8vw, 75px);
-  font-weight: 1000;
-  letter-spacing: 5px;
-  background: linear-gradient(90deg, var(--green), var(--cyan), var(--green));
-  background-size: 200%;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: textflow 4s linear infinite;
+  font-size:clamp(38px,8vw,76px);
+  font-weight:900;
+  letter-spacing:4px;
+  background:linear-gradient(90deg,var(--green),#c4ffd6,var(--cyan));
+  background-size:200% auto;
+  color:transparent;
+  background-clip:text;
+  -webkit-background-clip:text;
+  animation:titleShine 4s linear infinite;
 }
 
-@keyframes textflow {
-  to { background-position: 200% center; }
+@keyframes titleShine {
+  to {background-position:200% center;}
 }
 
-.subtitle {
-  margin-top: 18px;
-  color: #b5c9d5;
-  line-height: 1.8;
-  max-width: 600px;
-  font-size: 15px;
+.hero h2 {
+  color:var(--cyan);
+  font-size:clamp(17px,3vw,24px);
+  margin-top:12px;
 }
 
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 25px;
-  padding: 12px 20px;
-  border: 1px solid rgba(0,255,153,.4);
-  border-radius: 50px;
-  background: rgba(0,255,153,.06);
-  color: var(--green);
-  font-size: 13px;
+.hero p {
+  max-width:680px;
+  margin:20px auto;
+  line-height:1.9;
+  color:var(--muted);
 }
 
-.status-dot {
-  width: 9px;
-  height: 9px;
-  background: #888;
-  border-radius: 50%;
-  box-shadow: 0 0 10px currentColor;
+.badge {
+  display:inline-block;
+  padding:8px 14px;
+  margin-bottom:18px;
+  color:var(--green);
+  border:1px solid rgba(57,255,20,.4);
+  background:rgba(57,255,20,.06);
+  border-radius:30px;
+  font-size:12px;
+  letter-spacing:1px;
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 30px;
-}
+/* FEATURES */
 
-.btn {
-  display: inline-block;
-  padding: 14px 23px;
-  border-radius: 9px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-  border: 1px solid var(--green);
-  color: var(--green);
-  background: rgba(0,255,153,.07);
-  transition: .3s;
-  cursor: pointer;
-}
-
-.btn.primary {
-  background: var(--green);
-  color: #00130b;
-}
-
-.btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 22px rgba(0,255,153,.3);
-}
-
-section {
-  padding: 75px 7%;
-}
-
-.section-title {
-  text-align: center;
-  color: var(--green);
-  font-size: clamp(25px, 5vw, 38px);
-  margin-bottom: 15px;
-}
-
-.section-desc {
-  text-align: center;
-  color: #94aab7;
-  margin: 0 auto 40px;
-  max-width: 600px;
-  line-height: 1.7;
-  font-size: 14px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 22px;
-  max-width: 1100px;
-  margin: auto;
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
 }
 
 .card {
-  padding: 28px 23px;
-  border: 1px solid rgba(0,255,153,.2);
-  background: var(--card);
-  border-radius: 15px;
-  transition: .3s;
+  padding:25px;
+  background:var(--card);
+  border:1px solid rgba(57,255,20,.2);
+  border-radius:15px;
+  transition:.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  height:2px;
+  width:100%;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--green));
+  transition:.5s;
+}
+
+.card:hover::before {
+  left:0;
 }
 
 .card:hover {
-  transform: translateY(-7px);
-  border-color: var(--green);
-  box-shadow: 0 0 25px rgba(0,255,153,.09);
+  transform:translateY(-6px);
+  border-color:var(--green);
+  box-shadow:0 0 22px rgba(57,255,20,.09);
 }
 
 .card-icon {
-  font-size: 30px;
-  margin-bottom: 17px;
+  font-size:32px;
+  margin-bottom:16px;
 }
 
 .card h3 {
-  color: var(--green);
-  margin-bottom: 12px;
+  color:var(--green);
+  margin-bottom:12px;
+  font-size:18px;
 }
 
 .card p {
-  color: #a6b7c2;
-  font-size: 14px;
-  line-height: 1.8;
+  color:var(--muted);
+  line-height:1.8;
+  font-size:14px;
 }
 
-.commands {
-  max-width: 800px;
-  margin: auto;
-}
+/* COMMANDS */
 
 .search-box {
-  width: 100%;
-  padding: 15px;
-  border: 1px solid rgba(0,255,153,.3);
-  border-radius: 10px;
-  outline: none;
-  background: #0b1720;
-  color: white;
-  margin-bottom: 20px;
-  font-size: 14px;
+  max-width:550px;
+  margin:0 auto 25px;
+}
+
+.search-box input {
+  width:100%;
+  padding:15px 18px;
+  border-radius:10px;
+  border:1px solid rgba(57,255,20,.45);
+  background:#07120c;
+  color:white;
+  outline:none;
+}
+
+.search-box input:focus {
+  border-color:var(--cyan);
+  box-shadow:0 0 15px rgba(0,247,255,.15);
+}
+
+.command-list {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
 }
 
 .command {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(0,255,153,.15);
-  border-radius: 9px;
-  background: rgba(10,22,31,.8);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:14px;
+  background:rgba(10,24,19,.8);
+  border:1px solid rgba(57,255,20,.17);
+  border-radius:9px;
 }
 
 .command code {
-  color: var(--green);
-  font-size: 14px;
+  color:var(--green);
+  overflow-wrap:anywhere;
 }
 
-.command span {
-  color: #91a5b2;
-  font-size: 13px;
+.command p {
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
 }
 
 .copy-btn {
-  border: 1px solid var(--green);
-  color: var(--green);
-  background: transparent;
-  border-radius: 6px;
-  padding: 7px 10px;
-  cursor: pointer;
+  background:transparent;
+  color:var(--cyan);
+  border:1px solid rgba(0,247,255,.4);
+  border-radius:6px;
+  padding:7px 10px;
+  font-size:12px;
+  flex-shrink:0;
 }
 
-.music-box {
-  max-width: 520px;
-  margin: auto;
-  padding: 30px;
-  text-align: center;
-  border: 1px solid rgba(0,229,255,.25);
-  background: var(--card);
-  border-radius: 16px;
+.copy-btn:hover {
+  background:rgba(0,247,255,.1);
 }
 
-.music-icon {
-  font-size: 45px;
-  margin-bottom: 15px;
-  animation: musicPulse 2s infinite;
+.notice {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+  margin-top:15px;
 }
 
-@keyframes musicPulse {
-  50% { transform: scale(1.12); }
+/* AUTO VOICE */
+
+.voice-box {
+  text-align:center;
+  padding:35px 20px;
+  border:1px solid rgba(0,247,255,.25);
+  background:rgba(0,247,255,.035);
+  border-radius:16px;
 }
 
-.music-box p {
-  color: #9cb0bd;
-  font-size: 13px;
-  margin: 12px 0 20px;
+.voice-box h3 {
+  color:var(--cyan);
+  margin-bottom:15px;
 }
 
-audio {
-  width: 100%;
-  margin-top: 12px;
+.voice-box p {
+  color:var(--muted);
+  line-height:1.9;
 }
+
+/* PAIRING */
+
+.pairing-box {
+  max-width:620px;
+  margin:auto;
+  padding:30px;
+  text-align:center;
+  background:var(--card);
+  border:1px solid rgba(57,255,20,.3);
+  border-radius:15px;
+}
+
+.pairing-box input {
+  display:block;
+  width:100%;
+  margin:20px 0 12px;
+  padding:14px;
+  border-radius:8px;
+  border:1px solid #28553a;
+  outline:none;
+  background:#030906;
+  color:white;
+}
+
+.pairing-box input:focus {
+  border-color:var(--green);
+}
+
+#pairMessage {
+  color:var(--cyan);
+  margin-top:15px;
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* OWNER */
+
+.owner-card {
+  max-width:700px;
+  margin:auto;
+  text-align:center;
+  padding:35px 20px;
+  background:var(--card);
+  border:1px solid rgba(57,255,20,.3);
+  border-radius:18px;
+}
+
+.owner-card img {
+  width:110px;
+  height:110px;
+  object-fit:cover;
+  border-radius:50%;
+  border:2px solid var(--green);
+  box-shadow:0 0 22px rgba(57,255,20,.35);
+  margin-bottom:18px;
+}
+
+.owner-card h3 {
+  font-size:26px;
+  color:var(--green);
+}
+
+.owner-card p {
+  color:var(--muted);
+  margin-top:12px;
+  line-height:1.8;
+}
+
+/* YOUTUBE POPUP */
+
+.popup-overlay {
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(8px);
+}
+
+.popup-overlay.show {
+  display:flex;
+  animation:fadeIn .35s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+.popup {
+  width:100%;
+  max-width:390px;
+  text-align:center;
+  padding:32px 24px;
+  border:1px solid var(--green);
+  border-radius:18px;
+  background:#07120c;
+  box-shadow:0 0 25px rgba(57,255,20,.18),
+             0 0 40px rgba(0,247,255,.08);
+  animation:popupUp .4s ease;
+}
+
+@keyframes popupUp {
+  from {
+    transform:translateY(25px) scale(.95);
+    opacity:0;
+  }
+  to {
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
+}
+
+.youtube-icon {
+  font-size:43px;
+  margin-bottom:12px;
+}
+
+.popup h2 {
+  color:var(--green);
+  margin-bottom:12px;
+}
+
+.popup p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+  margin-bottom:20px;
+}
+
+.subscribe-btn {
+  display:block;
+  width:100%;
+  padding:13px;
+  background:#ff253a;
+  color:white;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.later-btn {
+  margin-top:17px;
+  border:none;
+  background:transparent;
+  color:#a8b8ae;
+  text-decoration:underline;
+  font-size:12px;
+}
+
+/* FOOTER */
 
 footer {
-  text-align: center;
-  padding: 30px 15px;
-  border-top: 1px solid rgba(0,255,153,.2);
-  color: #8295a1;
-  font-size: 13px;
-  line-height: 2;
+  border-top:1px solid rgba(57,255,20,.2);
+  padding:28px 18px;
+  text-align:center;
+  color:var(--muted);
+  line-height:1.9;
+  font-size:13px;
 }
 
 footer strong {
-  color: var(--green);
+  color:var(--green);
 }
 
-#toast {
-  position: fixed;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  padding: 12px 20px;
-  background: var(--green);
-  color: #00130b;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: bold;
-  transition: .3s;
-  z-index: 200;
-}
+/* RESPONSIVE */
 
-#toast.show {
-  transform: translateX(-50%) translateY(0);
-}
-
-@media (max-width: 600px) {
-  header {
-    flex-direction: column;
+@media(max-width:800px) {
+  .grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
   nav {
-    justify-content: center;
-    gap: 14px;
+    flex-wrap:wrap;
   }
 
-  .logo-wrap {
-    width: 180px;
-    height: 180px;
+  .nav-links {
+    order:3;
+    width:100%;
+    overflow-x:auto;
+    padding:5px 0;
+    gap:17px;
+  }
+
+  .nav-links a {
+    white-space:nowrap;
+  }
+}
+
+@media(max-width:520px) {
+  section {
+    padding:65px 16px;
+  }
+
+  .grid,.command-list {
+    grid-template-columns:1fr;
   }
 
   .hero {
-    min-height: 80vh;
+    min-height:570px;
   }
 
-  section {
-    padding: 55px 5%;
+  .hero-logo {
+    width:200px;
   }
 
-  .command {
-    flex-wrap: wrap;
+  .card {
+    padding:21px;
+  }
+
+  .pairing-box {
+    padding:23px 17px;
+  }
+
+  .brand {
+    font-size:18px;
+  }
+
+  .status-pill {
+    padding:8px 10px;
+    font-size:11px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
   }
 }
 </style>
@@ -415,453 +837,735 @@ footer strong {
 
 <body>
 
-<canvas id="particles"></canvas>
+<!-- INTRO -->
+<div id="intro">
+  <img src="1000006349.png" alt="DEW MD Logo">
+  <h1>DEW MD</h1>
+  <div class="loader"></div>
+  <p style="color:#9eb8a8;font-size:12px;letter-spacing:3px">
+    INITIALIZING SYSTEM
+  </p>
+</div>
 
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+
+<!-- NAVIGATION -->
 <header>
-  <div class="brand">⚡ DEW MD</div>
+<nav>
+  <a href="#home" class="brand">
+    <img src="1000006349.png" alt="DEW MD">
+    <span>DEW MD</span>
+  </a>
 
-  <nav>
+  <div class="nav-links">
     <a href="#home">Home</a>
     <a href="#features">Features</a>
     <a href="#commands">Commands</a>
-    <a href="#music">Music</a>
-  </nav>
+    <a href="#voice">Auto Voice</a>
+    <a href="#pairing">Pairing</a>
+    <a href="#owner">Owner</a>
+  </div>
+
+  <!-- LIVE BOT STATUS -->
+  <div class="status-pill status-checking"
+       id="navStatus"
+       role="status"
+       aria-live="polite">
+    <span class="status-dot"></span>
+    <span id="navStatusText">CHECKING...</span>
+  </div>
+</nav>
 </header>
 
 <main>
 
+<!-- HOME -->
 <section class="hero" id="home">
+<div class="container hero-content">
 
-  <div class="logo-wrap">
-    <img
-      class="logo"
-      src="1000006349.png"
-      alt="DEW MD Logo"
-      onerror="this.style.opacity='.2'"
-    >
+  <div class="status-pill status-checking hero-status"
+       id="heroStatus"
+       role="status"
+       aria-live="polite">
+    <span class="status-dot"></span>
+    <span id="heroStatusText">BOT STATUS: CHECKING...</span>
   </div>
+
+  <br>
+
+  <span class="badge">⚡ OFFICIAL WHATSAPP BOT WEBSITE</span>
+  <br>
+
+  <img class="hero-logo"
+       src="1000006349.png"
+       alt="DEW MD Cyber Logo">
 
   <h1>DEW MD</h1>
+  <h2>Next Generation WhatsApp Bot</h2>
 
-  <p class="subtitle">
-    Next Generation WhatsApp Bot<br>
-    Powerful Features • Smart Automation • Cyber Experience
+  <p>
+    Welcome to the official DEW MD website. Explore smart bot features,
+    useful commands and our growing community — all in one place.
   </p>
-
-  <div class="status">
-    <span class="status-dot" id="statusDot"></span>
-    <span id="statusText">Checking bot status...</span>
-  </div>
 
   <div class="buttons">
-    <a class="btn primary" href="#features">Explore Features</a>
-    <a class="btn" href="#commands">View Commands</a>
+    <a class="btn btn-primary" href="#features">⚡ Explore Features</a>
+
+    <a class="btn btn-secondary"
+       href="https://whatsapp.com/channel/0029Vb4hYYs77qVTnYMiAI11"
+       target="_blank" rel="noopener noreferrer">
+       💬 WhatsApp Channel
+    </a>
+
+    <a class="btn btn-secondary"
+       href="https://github.com/mddew268-lang/Dew-md"
+       target="_blank" rel="noopener noreferrer">
+       💻 GitHub Repository
+    </a>
   </div>
 
+</div>
 </section>
 
+<!-- FEATURES -->
 <section id="features">
+<div class="container">
 
-  <h2 class="section-title">⚡ Powerful Features</h2>
+  <h2 class="section-title">BOT <span>FEATURES</span></h2>
 
-  <p class="section-desc">
-    Discover the features designed to make your WhatsApp experience smarter.
+  <p class="section-description">
+    Explore the features planned for DEW MD. Actual bot features depend
+    on the code deployed to WhatsApp.
   </p>
 
-  <div class="cards">
+  <div class="grid">
 
-    <div class="card">
+    <article class="card">
+      <div class="card-icon">🤖</div>
+      <h3>Smart Commands</h3>
+      <p>Useful commands for bot information and supported WhatsApp tasks.</p>
+    </article>
+
+    <article class="card">
       <div class="card-icon">🎙️</div>
       <h3>Auto Voice</h3>
-      <p>Configure automatic voice-note replies for supported messages.</p>
-    </div>
+      <p>Automatic greeting voice notes when configured in the WhatsApp bot.</p>
+    </article>
 
-    <div class="card">
-      <div class="card-icon">🤖</div>
-      <h3>Auto Reply</h3>
-      <p>Automatic replies for supported messages and conversations.</p>
-    </div>
+    <article class="card">
+      <div class="card-icon">🛡️</div>
+      <h3>Group Tools</h3>
+      <p>Group management commands for supported groups and authorized admins.</p>
+    </article>
 
-    <div class="card">
-      <div class="card-icon">👋</div>
-      <h3>Auto Welcome</h3>
-      <p>Welcome messages for new group members when configured.</p>
-    </div>
+    <article class="card">
+      <div class="card-icon">🎨</div>
+      <h3>Sticker Tools</h3>
+      <p>Sticker creation and media conversion features when supported by the bot.</p>
+    </article>
 
-    <div class="card">
-      <div class="card-icon">🎵</div>
-      <h3>Music Commands</h3>
-      <p>Use supported bot commands to request music and audio.</p>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">🖼️</div>
-      <h3>Sticker Maker</h3>
-      <p>Create stickers using the commands supported by your bot.</p>
-    </div>
-
-    <div class="card">
+    <article class="card">
       <div class="card-icon">⚙️</div>
-      <h3>Smart Settings</h3>
-      <p>Manage automation options through your bot's settings menu.</p>
-    </div>
+      <h3>Bot Settings</h3>
+      <p>Configuration options for supported automatic replies and bot features.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-icon">✨</div>
+      <h3>Cyber Design</h3>
+      <p>Neon green and cyan styling, glowing effects and animated 3D-style logo.</p>
+    </article>
 
   </div>
-
+</div>
 </section>
 
+<!-- COMMANDS -->
 <section id="commands">
+<div class="container">
 
-  <h2 class="section-title">⌨️ Bot Commands</h2>
+  <h2 class="section-title">BOT <span>COMMANDS</span></h2>
 
-  <p class="section-desc">
-    Search commands and copy them quickly.
-    Available commands depend on your bot's actual code.
+  <p class="section-description">
+    Search a command and tap Copy. A command works only if implemented
+    and enabled in the running WhatsApp bot.
   </p>
 
-  <div class="commands">
+  <div class="search-box">
+    <input type="search"
+           id="commandSearch"
+           placeholder="🔎 Search commands..."
+           aria-label="Search commands">
+  </div>
 
-    <input
-      class="search-box"
-      id="commandSearch"
-      type="search"
-      placeholder="🔍 Search commands..."
-      aria-label="Search bot commands"
-    >
+  <div class="command-list" id="commandList">
 
-    <div id="commandList">
+    <div class="command" data-search=".menu menu">
+      <div><code>.menu</code><p>Show bot menu</p></div>
+      <button class="copy-btn" data-copy=".menu">Copy</button>
+    </div>
 
-      <div class="command" data-search=".menu menu">
-        <div>
-          <code>.menu</code><br>
-          <span>Show the bot menu</span>
-        </div>
-        <button class="copy-btn" data-command=".menu">Copy</button>
-      </div>
+    <div class="command" data-search=".help help">
+      <div><code>.help</code><p>Help information</p></div>
+      <button class="copy-btn" data-copy=".help">Copy</button>
+    </div>
 
-      <div class="command" data-search=".help help">
-        <div>
-          <code>.help</code><br>
-          <span>Show help information</span>
-        </div>
-        <button class="copy-btn" data-command=".help">Copy</button>
-      </div>
+    <div class="command" data-search=".ping ping">
+      <div><code>.ping</code><p>Check bot response</p></div>
+      <button class="copy-btn" data-copy=".ping">Copy</button>
+    </div>
 
-      <div class="command" data-search=".ping ping">
-        <div>
-          <code>.ping</code><br>
-          <span>Check bot response</span>
-        </div>
-        <button class="copy-btn" data-command=".ping">Copy</button>
-      </div>
+    <div class="command" data-search=".alive alive status">
+      <div><code>.alive</code><p>Check bot status</p></div>
+      <button class="copy-btn" data-copy=".alive">Copy</button>
+    </div>
 
-      <div class="command" data-search=".alive alive">
-        <div>
-          <code>.alive</code><br>
-          <span>Show bot information</span>
-        </div>
-        <button class="copy-btn" data-command=".alive">Copy</button>
-      </div>
+    <div class="command" data-search=".uptime uptime">
+      <div><code>.uptime</code><p>Show running time</p></div>
+      <button class="copy-btn" data-copy=".uptime">Copy</button>
+    </div>
 
-      <div class="command" data-search=".owner owner">
-        <div>
-          <code>.owner</code><br>
-          <span>Show owner information</span>
-        </div>
-        <button class="copy-btn" data-command=".owner">Copy</button>
-      </div>
+    <div class="command" data-search=".owner owner">
+      <div><code>.owner</code><p>Owner information</p></div>
+      <button class="copy-btn" data-copy=".owner">Copy</button>
+    </div>
 
-      <div class="command" data-search=".setting settings">
-        <div>
-          <code>.setting</code><br>
-          <span>Open bot settings</span>
-        </div>
-        <button class="copy-btn" data-command=".setting">Copy</button>
-      </div>
+    <div class="command" data-search=".repo github repository">
+      <div><code>.repo</code><p>Repository information</p></div>
+      <button class="copy-btn" data-copy=".repo">Copy</button>
+    </div>
 
-      <div class="command" data-search=".sticker sticker">
-        <div>
-          <code>.sticker</code><br>
-          <span>Create a sticker where supported</span>
-        </div>
-        <button class="copy-btn" data-command=".sticker">Copy</button>
-      </div>
+    <div class="command" data-search=".sticker sticker">
+      <div><code>.sticker</code><p>Create a sticker</p></div>
+      <button class="copy-btn" data-copy=".sticker">Copy</button>
+    </div>
 
-      <div class="command" data-search=".yt youtube music">
-        <div>
-          <code>.yt song name</code><br>
-          <span>Request a song where supported</span>
-        </div>
-        <button class="copy-btn" data-command=".yt ">Copy</button>
-      </div>
+    <div class="command" data-search=".toimg image convert">
+      <div><code>.toimg</code><p>Convert supported media</p></div>
+      <button class="copy-btn" data-copy=".toimg">Copy</button>
+    </div>
 
+    <div class="command" data-search=".take sticker">
+      <div><code>.take</code><p>Customize sticker details</p></div>
+      <button class="copy-btn" data-copy=".take">Copy</button>
+    </div>
+
+    <div class="command" data-search=".ai artificial intelligence">
+      <div><code>.ai</code><p>AI feature, if configured</p></div>
+      <button class="copy-btn" data-copy=".ai">Copy</button>
+    </div>
+
+    <div class="command" data-search=".yt youtube">
+      <div><code>.yt</code><p>Search YouTube</p></div>
+      <button class="copy-btn" data-copy=".yt">Copy</button>
+    </div>
+
+    <div class="command" data-search=".song music audio">
+      <div><code>.song</code><p>Music command reference</p></div>
+      <button class="copy-btn" data-copy=".song">Copy</button>
+    </div>
+
+    <div class="command" data-search=".play play music">
+      <div><code>.play</code><p>Play command reference</p></div>
+      <button class="copy-btn" data-copy=".play">Copy</button>
+    </div>
+
+    <div class="command" data-search=".video video">
+      <div><code>.video</code><p>Video command reference</p></div>
+      <button class="copy-btn" data-copy=".video">Copy</button>
+    </div>
+
+    <div class="command" data-search=".lyrics song lyrics">
+      <div><code>.lyrics</code><p>Lyrics command reference</p></div>
+      <button class="copy-btn" data-copy=".lyrics">Copy</button>
+    </div>
+
+    <div class="command" data-search=".translate language">
+      <div><code>.translate</code><p>Translation command</p></div>
+      <button class="copy-btn" data-copy=".translate">Copy</button>
+    </div>
+
+    <div class="command" data-search=".groupinfo group">
+      <div><code>.groupinfo</code><p>Group information</p></div>
+      <button class="copy-btn" data-copy=".groupinfo">Copy</button>
+    </div>
+
+    <div class="command" data-search=".admins administrators">
+      <div><code>.admins</code><p>Group admin information</p></div>
+      <button class="copy-btn" data-copy=".admins">Copy</button>
+    </div>
+
+    <div class="command" data-search=".tagall tag group">
+      <div><code>.tagall</code><p>Tag group members</p></div>
+      <button class="copy-btn" data-copy=".tagall">Copy</button>
+    </div>
+
+    <div class="command" data-search=".hidetag hide tag">
+      <div><code>.hidetag</code><p>Hidden group mention</p></div>
+      <button class="copy-btn" data-copy=".hidetag">Copy</button>
+    </div>
+
+    <div class="command" data-search=".kick remove member">
+      <div><code>.kick</code><p>Group moderation</p></div>
+      <button class="copy-btn" data-copy=".kick">Copy</button>
+    </div>
+
+    <div class="command" data-search=".promote admin">
+      <div><code>.promote</code><p>Promote a group member</p></div>
+      <button class="copy-btn" data-copy=".promote">Copy</button>
+    </div>
+
+    <div class="command" data-search=".demote admin">
+      <div><code>.demote</code><p>Demote a group admin</p></div>
+      <button class="copy-btn" data-copy=".demote">Copy</button>
+    </div>
+
+    <div class="command" data-search=".mute group">
+      <div><code>.mute</code><p>Group moderation</p></div>
+      <button class="copy-btn" data-copy=".mute">Copy</button>
+    </div>
+
+    <div class="command" data-search=".unmute group">
+      <div><code>.unmute</code><p>Group moderation</p></div>
+      <button class="copy-btn" data-copy=".unmute">Copy</button>
+    </div>
+
+    <div class="command" data-search=".open group">
+      <div><code>.open</code><p>Open group messaging</p></div>
+      <button class="copy-btn" data-copy=".open">Copy</button>
+    </div>
+
+    <div class="command" data-search=".close group">
+      <div><code>.close</code><p>Close group messaging</p></div>
+      <button class="copy-btn" data-copy=".close">Copy</button>
+    </div>
+
+    <div class="command" data-search=".delete message">
+      <div><code>.delete</code><p>Delete a supported message</p></div>
+      <button class="copy-btn" data-copy=".delete">Copy</button>
+    </div>
+
+    <div class="command" data-search=".getpp profile picture">
+      <div><code>.getpp</code><p>Profile picture command</p></div>
+      <button class="copy-btn" data-copy=".getpp">Copy</button>
+    </div>
+
+    <div class="command" data-search=".calc calculator math">
+      <div><code>.calc</code><p>Calculator command</p></div>
+      <button class="copy-btn" data-copy=".calc">Copy</button>
+    </div>
+
+    <div class="command" data-search=".grouplink group link">
+      <div><code>.grouplink</code><p>Group link command</p></div>
+      <button class="copy-btn" data-copy=".grouplink">Copy</button>
+    </div>
+
+    <div class="command" data-search=".groupdesc group description">
+      <div><code>.groupdesc</code><p>Group description</p></div>
+      <button class="copy-btn" data-copy=".groupdesc">Copy</button>
+    </div>
+
+    <div class="command" data-search=".setgroupname group name">
+      <div><code>.setgroupname</code><p>Set group name</p></div>
+      <button class="copy-btn" data-copy=".setgroupname">Copy</button>
+    </div>
+
+    <div class="command" data-search=".setdesc description">
+      <div><code>.setdesc</code><p>Set group description</p></div>
+      <button class="copy-btn" data-copy=".setdesc">Copy</button>
+    </div>
+
+    <div class="command" data-search=".afk away">
+      <div><code>.afk</code><p>Set away status</p></div>
+      <button class="copy-btn" data-copy=".afk">Copy</button>
+    </div>
+
+    <div class="command" data-search=".back return">
+      <div><code>.back</code><p>Return from away status</p></div>
+      <button class="copy-btn" data-copy=".back">Copy</button>
+    </div>
+
+    <div class="command" data-search=".remind reminder">
+      <div><code>.remind</code><p>Reminder command</p></div>
+      <button class="copy-btn" data-copy=".remind">Copy</button>
     </div>
 
   </div>
 
-</section>
-
-<section id="music">
-
-  <h2 class="section-title">🎧 Music Player</h2>
-
-  <p class="section-desc">
-    Enjoy your music while exploring the DEW MD website.
+  <p id="noCommands" class="notice" style="display:none;text-align:center">
+    No matching commands found.
   </p>
 
-  <div class="music-box">
+</div>
+</section>
 
-    <div class="music-icon">🎶</div>
+<!-- AUTO VOICE -->
+<section id="voice">
+<div class="container">
 
-    <h3>Pal Pal</h3>
+  <h2 class="section-title">AUTO <span>VOICE</span></h2>
 
-    <p>Afusic • Background Music Player</p>
+  <p class="section-description">
+    Automatic greeting voice notes for DEW MD.
+  </p>
 
-    <audio controls preload="none">
-      <source
-        src="Pal_Pal_Lyrics_-_Afusic_prod._by_AliSoomroMusic(48k).mp3"
-        type="audio/mpeg"
-      >
-      Your browser does not support audio playback.
-    </audio>
+  <div class="voice-box">
+    <div style="font-size:45px;margin-bottom:15px">🎙️</div>
 
-    <p>Press play to start the music.</p>
+    <h3>Smart Greeting Responses</h3>
 
+    <p>
+      <strong style="color:#39ff14">GM</strong> — Good morning 💞<br>
+      <strong style="color:#39ff14">GN</strong> — Good night 💞<br>
+      <strong style="color:#39ff14">MK</strong> — Mokuth na ithin
+    </p>
+
+    <p style="margin-top:15px">
+      Actual voice responses require the audio files and Auto Voice feature
+      to be configured in the WhatsApp bot.
+    </p>
   </div>
 
+</div>
+</section>
+
+<!-- PAIRING -->
+<section id="pairing">
+<div class="container">
+
+  <h2 class="section-title">WHATSAPP <span>PAIRING</span></h2>
+
+  <p class="section-description">
+    DEW MD WhatsApp pairing interface.
+  </p>
+
+  <div class="pairing-box">
+
+    <div style="font-size:42px;margin-bottom:15px">🔐</div>
+
+    <h3 style="color:#39ff14">Connect Your WhatsApp</h3>
+
+    <p class="notice">
+      This is only a website preview. A backend must be connected before
+      this page can generate a real WhatsApp pairing code.
+    </p>
+
+    <form id="pairForm">
+      <input
+        id="phoneNumber"
+        type="tel"
+        inputmode="tel"
+        autocomplete="tel"
+        placeholder="Example: 94771234567"
+        aria-label="WhatsApp number with country code"
+        required
+      >
+
+      <button class="btn btn-primary" type="submit">
+        Generate Pairing Code
+      </button>
+    </form>
+
+    <p id="pairMessage" role="status"></p>
+
+  </div>
+</div>
+</section>
+
+<!-- OWNER -->
+<section id="owner">
+<div class="container">
+
+  <h2 class="section-title">BOT <span>OWNER</span></h2>
+
+  <p class="section-description">
+    Official DEW MD links and community.
+  </p>
+
+  <div class="owner-card">
+
+    <img src="1000006349.png" alt="DEW MD Logo">
+
+    <h3>ARUSHA DEWMINA</h3>
+
+    <p>Owner and developer of DEW MD WhatsApp Bot.</p>
+
+    <div class="buttons">
+
+      <a class="btn btn-primary"
+         href="https://github.com/mddew268-lang/Dew-md"
+         target="_blank" rel="noopener noreferrer">
+         💻 GitHub
+      </a>
+
+      <a class="btn btn-secondary"
+         href="https://whatsapp.com/channel/0029Vb4hYYs77qVTnYMiAI11"
+         target="_blank" rel="noopener noreferrer">
+         💬 WhatsApp Channel
+      </a>
+
+      <a class="btn btn-secondary"
+         href="https://www.youtube.com/@dew_md_wabot12"
+         target="_blank" rel="noopener noreferrer">
+         ▶ YouTube
+      </a>
+
+    </div>
+  </div>
+</div>
 </section>
 
 </main>
 
+<!-- YOUTUBE POPUP -->
+<div class="popup-overlay" id="youtubePopup">
+  <div class="popup">
+
+    <div class="youtube-icon">▶️</div>
+
+    <h2>Join DEW MD!</h2>
+
+    <p>
+      Subscribe to our YouTube channel to follow DEW MD updates and new
+      WhatsApp bot features.
+    </p>
+
+    <a class="subscribe-btn"
+       href="https://www.youtube.com/@dew_md_wabot12"
+       target="_blank" rel="noopener noreferrer">
+       SUBSCRIBE ON YOUTUBE
+    </a>
+
+    <button class="later-btn" id="closePopup">Maybe Later</button>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <strong>⚡ DEW MD</strong><br>
-  Next Generation WhatsApp Bot<br>
-  © <span id="year"></span> DEW MD. All rights reserved.
+  <p>© <span id="year"></span> <strong>DEW MD</strong>. All rights reserved.</p>
+  <p>Designed with 💚 Neon Green + Cyan Cyber Style.</p>
 </footer>
 
-<div id="toast" role="status" aria-live="polite">Copied!</div>
-
 <script>
-/* =====================================
-   DEW MD WEBSITE CONFIGURATION
-===================================== */
-
-/*
-  IMPORTANT:
-  The status below is only a demo until
-  you connect a real backend API.
-
-  Change this to your real API endpoint
-  after deploying the bot status backend.
-*/
-const BOT_STATUS_API = "";
-
-/* Footer year */
+/* CURRENT YEAR */
 document.getElementById("year").textContent =
   new Date().getFullYear();
 
-/* =====================================
-   BOT ONLINE / OFFLINE STATUS
-===================================== */
+/* HIDE INTRO */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    const intro = document.getElementById("intro");
+    if (intro) intro.style.display = "none";
+  }, 3500);
+});
 
-const statusText = document.getElementById("statusText");
-const statusDot = document.getElementById("statusDot");
+/* ==================================================
+   DEW MD LIVE STATUS
 
-function setBotStatus(isOnline) {
-  statusText.textContent = isOnline
-    ? "Bot Online"
-    : "Bot Offline";
+   Public status endpoint:
+   https://dew-md-status.massking923.workers.dev/status
 
-  statusDot.style.background = isOnline
-    ? "#00ff99"
-    : "#ff4757";
+   The endpoint must return JSON such as:
+   {"online":true,"status":"ONLINE","lastSeen":1234567890}
+   ================================================== */
 
-  statusDot.style.color = isOnline
-    ? "#00ff99"
-    : "#ff4757";
+const STATUS_API =
+  "https://dew-md-status.massking923.workers.dev/status";
+
+const navStatus = document.getElementById("navStatus");
+const navStatusText = document.getElementById("navStatusText");
+const heroStatus = document.getElementById("heroStatus");
+const heroStatusText = document.getElementById("heroStatusText");
+
+function displayBotStatus(state, message) {
+  const classes = {
+    checking: "status-checking",
+    online: "status-online",
+    offline: "status-offline",
+    error: "status-error"
+  };
+
+  const className = classes[state] || "status-error";
+
+  navStatus.className = "status-pill " + className;
+  heroStatus.className = "status-pill hero-status " + className;
+
+  navStatusText.textContent = message;
+  heroStatusText.textContent = "BOT STATUS: " + message;
 }
 
-async function checkBotStatus() {
-  if (!BOT_STATUS_API) {
-    statusText.textContent = "Status API Not Connected";
-    statusDot.style.background = "#ffb020";
-    statusDot.style.color = "#ffb020";
-    return;
-  }
+async function updateBotStatus() {
+  displayBotStatus("checking", "CHECKING...");
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
 
   try {
-    const response = await fetch(BOT_STATUS_API, {
-      cache: "no-store"
-    });
+    const response = await fetch(
+      STATUS_API + "?t=" + Date.now(),
+      {
+        method: "GET",
+        cache: "no-store",
+        signal: controller.signal
+      }
+    );
 
     if (!response.ok) {
-      throw new Error("Status request failed");
+      throw new Error("Status API returned HTTP " + response.status);
     }
 
     const data = await response.json();
-    setBotStatus(data.online === true);
+
+    if (data.online === true || data.status === "ONLINE") {
+      displayBotStatus("online", "ONLINE");
+    } else if (data.online === false || data.status === "OFFLINE") {
+      displayBotStatus("offline", "OFFLINE");
+    } else {
+      displayBotStatus("error", "STATUS UNAVAILABLE");
+    }
 
   } catch (error) {
-    statusText.textContent = "Status Unavailable";
-    statusDot.style.background = "#ff4757";
-    statusDot.style.color = "#ff4757";
+    console.warn("DEW MD live status could not be loaded:", error);
+    displayBotStatus("error", "STATUS UNAVAILABLE");
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
-checkBotStatus();
+/* Check immediately and refresh every 15 seconds. */
+updateBotStatus();
+setInterval(updateBotStatus, 15000);
 
-if (BOT_STATUS_API) {
-  setInterval(checkBotStatus, 15000);
-}
+/* COMMAND SEARCH */
+const commandSearch = document.getElementById("commandSearch");
+const commandCards = document.querySelectorAll(".command");
+const noCommands = document.getElementById("noCommands");
 
-/* =====================================
-   COMMAND SEARCH
-===================================== */
+commandSearch.addEventListener("input", () => {
+  const searchText = commandSearch.value.toLowerCase().trim();
+  let visibleCount = 0;
 
-const commandSearch =
-  document.getElementById("commandSearch");
+  commandCards.forEach(card => {
+    const searchableText =
+      (card.dataset.search + " " + card.innerText).toLowerCase();
 
-const commandItems =
-  document.querySelectorAll(".command");
+    const matches = searchableText.includes(searchText);
 
-commandSearch.addEventListener("input", function () {
-  const query = this.value.toLowerCase().trim();
+    card.style.display = matches ? "flex" : "none";
 
-  commandItems.forEach(function (item) {
-    const text = item.dataset.search.toLowerCase();
-
-    item.style.display =
-      text.includes(query) ? "flex" : "none";
+    if (matches) visibleCount++;
   });
+
+  noCommands.style.display =
+    visibleCount === 0 ? "block" : "none";
 });
 
-/* =====================================
-   COPY COMMANDS
-===================================== */
+/* COPY COMMAND */
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (error) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
 
-const toast = document.getElementById("toast");
-let toastTimer;
+    document.body.appendChild(textarea);
+    textarea.select();
 
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer = setTimeout(function () {
-    toast.classList.remove("show");
-  }, 1800);
-}
-
-document.querySelectorAll(".copy-btn").forEach(function (button) {
-  button.addEventListener("click", async function () {
-    const command = this.dataset.command;
+    let success = false;
 
     try {
-      await navigator.clipboard.writeText(command);
-      showToast("Copied: " + command);
-    } catch (error) {
-      const textArea = document.createElement("textarea");
-
-      textArea.value = command;
-      document.body.appendChild(textArea);
-      textArea.select();
-
-      const copied = document.execCommand("copy");
-      textArea.remove();
-
-      showToast(copied ? "Command copied!" : "Copy failed");
+      success = document.execCommand("copy");
+    } catch (copyError) {
+      success = false;
     }
+
+    textarea.remove();
+    return success;
+  }
+}
+
+document.querySelectorAll(".copy-btn").forEach(button => {
+  button.addEventListener("click", async () => {
+    const command = button.dataset.copy;
+    const originalText = button.textContent;
+    const copied = await copyText(command);
+
+    button.textContent =
+      copied ? "Copied!" : "Select manually";
+
+    setTimeout(() => {
+      button.textContent = originalText;
+    }, 1400);
   });
 });
 
-/* =====================================
-   CYBER PARTICLE BACKGROUND
-===================================== */
+/* PAIRING PLACEHOLDER
+   This does not generate a real pairing code.
+   A real backend must be connected for WhatsApp pairing.
+*/
+document.getElementById("pairForm").addEventListener("submit", event => {
+  event.preventDefault();
 
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+  const number =
+    document.getElementById("phoneNumber").value.trim();
 
-let particles = [];
-let width = 0;
-let height = 0;
+  const message = document.getElementById("pairMessage");
+  const cleanedNumber = number.replace(/[+\s()-]/g, "");
 
-function resizeCanvas() {
-  const ratio = Math.min(window.devicePixelRatio || 1, 2);
+  if (!/^\d{8,15}$/.test(cleanedNumber)) {
+    message.textContent =
+      "Please enter a valid phone number with country code.";
+    return;
+  }
 
-  width = window.innerWidth;
-  height = window.innerHeight;
+  message.textContent =
+    "Pairing backend is not connected yet. No pairing code was generated.";
+});
 
-  canvas.width = width * ratio;
-  canvas.height = height * ratio;
+/* YOUTUBE POPUP */
+const youtubePopup = document.getElementById("youtubePopup");
+const closePopup = document.getElementById("closePopup");
 
-  canvas.style.width = width + "px";
-  canvas.style.height = height + "px";
+function hideYoutubePopup() {
+  youtubePopup.classList.remove("show");
 
-  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-  const count = Math.min(
-    65,
-    Math.floor((width * height) / 14000)
-  );
-
-  particles = Array.from({ length: count }, function () {
-    return {
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.45,
-      vy: (Math.random() - 0.5) * 0.45,
-      r: Math.random() * 1.8 + 0.5
-    };
-  });
+  try {
+    sessionStorage.setItem("dewMdPopupClosed", "yes");
+  } catch (error) {
+    // The popup can still close if storage is unavailable.
+  }
 }
 
-function animateParticles() {
-  ctx.clearRect(0, 0, width, height);
+closePopup.addEventListener("click", hideYoutubePopup);
 
-  particles.forEach(function (p, i) {
-    p.x += p.vx;
-    p.y += p.vy;
+youtubePopup.addEventListener("click", event => {
+  if (event.target === youtubePopup) {
+    hideYoutubePopup();
+  }
+});
 
-    if (p.x < 0 || p.x > width) p.vx *= -1;
-    if (p.y < 0 || p.y > height) p.vy *= -1;
+window.addEventListener("load", () => {
+  let alreadyClosed = false;
 
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "#00ff99";
-    ctx.fill();
+  try {
+    alreadyClosed =
+      sessionStorage.getItem("dewMdPopupClosed") === "yes";
+  } catch (error) {
+    alreadyClosed = false;
+  }
 
-    for (let j = i + 1; j < particles.length; j++) {
-      const other = particles[j];
-
-      const dx = p.x - other.x;
-      const dy = p.y - other.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 105) {
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(other.x, other.y);
-
-        ctx.strokeStyle =
-          "rgba(0, 255, 153, " +
-          (1 - distance / 105) * 0.16 +
-          ")";
-
-        ctx.lineWidth = 0.7;
-        ctx.stroke();
-      }
-    }
-  });
-
-  requestAnimationFrame(animateParticles);
-}
-
-window.addEventListener("resize", resizeCanvas);
-
-resizeCanvas();
-animateParticles();
+  if (!alreadyClosed) {
+    setTimeout(() => {
+      youtubePopup.classList.add("show");
+    }, 6000);
+  }
+});
 </script>
 
 </body>
-      </html>
+  </html>
